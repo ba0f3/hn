@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import './rxjs-operators';
 import { Item } from './models';
 
+const ws_prefix = "http://localhost:5000"
 const prefix =  "https://hacker-news.firebaseio.com/v0/";
 
 @Injectable()
@@ -15,7 +16,7 @@ export class HnService {
 
   getTopStories (): Observable<number[]> {
     return this.http.get(this.topStories)
-      .map(this.fetchItems)
+      .map(this.parseJson)
       .catch(this.handleError);
   }
 
@@ -25,14 +26,19 @@ export class HnService {
       .catch(this.handleError);
   }
 
-  private fetchItems(res: Response) {
+  fetchContent(url: string, id: number): Observable<any> {
+    return this.http.get(ws_prefix + "/?url=" + encodeURIComponent(url) + "&id=" + id)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
+  private parseJson(res: Response) {
     return res.json() || [];
   }
 
   private handleError (error: any) {
     let errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-    console.error(errMsg);
     return Observable.throw(errMsg);
   }
 }

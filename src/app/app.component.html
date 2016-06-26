@@ -23,35 +23,29 @@
       </header>
     </div>
     <section class="pagebd-container">
-      <div class="bd" [hidden]="showLoading">
-        <br><div class="show-loading"><div class="circle"></div><br>Loading...</div>
-      </div>
-      <ul class="list">
-        <li *ngFor="let item of items" data-id="{item.id}}" class="">
-          <a href="#/article/{{item.id}}" class="story {visitedArticle}">
-            <h3>{{item.title}}</h3>
+      <div class="bd">
+        <div class="show-loading" [hidden]="!showLoading"><div class="circle"></div><br>Loading...</div>
+        <ul class="list">
+          <li *ngFor="let item of items" data-id="{{item.id}}">
+            <a href="#/article/{{item.id}}" class="story">
+              <h3>{{item.title}}</h3>
 
-            <span class="points">{{item.score}}</span>
-            <span class="author">{{item.by}}</span>
-            <span class="time-ago">{{item.time | amFromUnix | amTimeAgo}}</span>
-            <span class="url">{{item.url}}</span>
-          </a>
-          <a href="#/comments/{item.id}}" class=" comments {visitedComments}">
-            <span class="icon icon-bubble"></span>{{item.kids.length}}
-          </a>
-        </li>
-      </ul>
+              <span class="points">{{item.score}}</span>
+              <span class="author">{{item.by}}</span>
+              <span class="time-ago">{{item.time | amFromUnix | amTimeAgo}}</span>
+              <span class="url">{{item.url | prettyUrl}}</span>
+            </a>
+            <a href="#/comments/{{item.id}}" class=" comments">
+              <span class="icon icon-bubble"></span>{{item.descendants}}
+            </a>
+          </li>
+        </ul>
+        <div class="more" [hidden]="!showLoadMore"><a href="#" class="load-more" (click)="loadNext()">Load More</a></div>
+      </div>
     </section>
   </div>
 
   <div class="page page-article-content" data-page="page-article-content">
-  </div>
-
-  <div class="page page-article-comments" data-page="page-article-comments">
-  </div>
-  <div class="page page-settings">
-
-  </div>
-  <div class="page page-about">
+    <router-outlet></router-outlet>
   </div>
 </div>

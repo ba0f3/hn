@@ -1,4 +1,14 @@
 
+export enum Page {
+  FRONT_PAGE = 1,
+  ASK_HN,
+  SHOW_HN,
+  NEWEST
+}
+
+
+
+
 export class Item {
   id: number;
   deleted: boolean;
@@ -14,5 +24,5 @@ export class Item {
   title: string;
   parts: string[];
   descendants: number;
-  
+
 }

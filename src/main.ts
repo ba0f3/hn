@@ -1,11 +1,16 @@
 import { bootstrap } from '@angular/platform-browser-dynamic';
 import { enableProdMode } from '@angular/core';
-import { AppComponent, environment  } from './app/';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { APP_ROUTER_PROVIDERS, AppComponent, environment  } from './app/';
 import { HTTP_PROVIDERS} from '@angular/http';
 import { HnService } from './app/hn.service';
+
+
 
 if (environment.production) {
   enableProdMode();
 }
 
-bootstrap(AppComponent, [HTTP_PROVIDERS, HnService]);
+bootstrap(AppComponent, [HTTP_PROVIDERS, APP_ROUTER_PROVIDERS, HnService,
+  { provide: LocationStrategy, useClass: HashLocationStrategy }
+]).catch(err => console.error(err));

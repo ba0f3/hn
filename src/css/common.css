@@ -27,7 +27,7 @@ html {
 body {
     margin: 0 auto;
     padding: 0;
-    font-family: 'Source Sans Pro', Helvetica Neue, Segoe UI, trebuchet MS, Arial, sans-serif;
+    font-family: 'Roboto', Helvetica Neue, Segoe UI, trebuchet MS, Arial, sans-serif;
     line-height: 1.618;
     color: #33393f;
     -webkit-font-smoothing: antialiased;
@@ -35,7 +35,7 @@ body {
 }
 
 .ie-mobile body {
-    font-family: Segoe WP, 'Source Sans Pro', Helvetica Neue, Segoe UI, trebuchet MS, Arial, sans-serif;
+    font-family: Segoe WP, 'Roboto', Helvetica Neue, Segoe UI, trebuchet MS, Arial, sans-serif;
     font-size: 92%;
 }
 
@@ -83,12 +83,6 @@ h3,
 * {
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
-
-
-
-
-
-
 
 
 #loading {

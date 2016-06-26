@@ -145,6 +145,13 @@
   margin-right: 50px;
 }
 
+.page-home .bd .more a.load-more {
+  padding: 10px 0;
+  text-align: center;
+  font-weight: 400;
+  background: rgba(0, 0, 0, .1);
+}
+
 .page-home .bd .comments {
   width: 50px;
   background: rgba(0,0,0,0.031);
