@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Hn</title>
+  <title>Hacker News</title>
   <base href="/">
 
   {{#unless environment.production}}
@@ -10,11 +10,20 @@
   {{/unless}}
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600"/>
+  <link rel="stylesheet" type="text/css" href="css/glyph/style.css"/>
+  <link rel="stylesheet" type="text/css" href="css/normalize.css"/>
+  <link rel="stylesheet" type="text/css" href="css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="css/dark.css"/>
+  <style>
+    a:focus,
+    a:active {
+      outline: 0;
+    }
+  </style>
 </head>
 <body>
   <app-root>Loading...</app-root>
-
-  
 
     {{#each scripts.polyfills}}
     <script src="{{.}}"></script>
@@ -25,7 +34,7 @@
       }).catch(console.error.bind(console));
     </script>
 
-  
+
 
 </body>
 </html>
