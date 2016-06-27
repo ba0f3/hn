@@ -1,0 +1,10 @@
+<div *ngIf="comment">
+  <div class="comment-meta">
+    <span class="author"><span class="icon icon-user"></span><span class="text"> {{comment.by}}</span></span>
+    <time class="time-ago"><span class="icon icon-hourglass"></span><span class="text"> {{comment.time | amFromUnix | amTimeAgo}}</span></time>
+  </div>
+  <div class="comment" innerHTML="{{comment.text}}"></div>
+  <ul class="kids">
+    <li comment-item *ngFor="let kid of comment.kids" [id]="kid"></li>
+  </ul>
+</div>

@@ -3,22 +3,22 @@
     <div class="header-container">
       <header class="header">
         <ul class="l-menu list-inline menu">
-          <li>
-            <a href="#" class="toggle-submenu"><span class="icon icon-settings"></span></a>
+          <li ngClass="{{showSubMenu}}">
+            <a href="#" class="toggle-submenu" (click)="toggleSubMenu($event)"><span class="icon icon-settings"></span></a>
             <ul class="submenu">
-              <li><a href="#" class="filter-fp">Hacker News</a></li>
-              <li><a href="#" class="filter-ask-hn">Ask HN</a></li>
-              <li><a href="#" class="filter-show-hn">Show HN</a></li>
-              <li><a href="#" class="filter-today-top-10">Top 10 (Today)</a></li>
-              <li><a href="#" class="filter-yesterday-top-10">Top 10 (Yesterday)</a></li>
-              <li><a href="#" class="filter-week-top-10">Top 10 (Last 7 days)</a></li>
-              <li><a href="#" class="show-settings">Settings</a></li>
+              <li><a href="#" (click)="switchPage('fp')">Top Stories</a></li>
+              <li><a href="#" (click)="switchPage('show')">Show HN</a></li>
+              <li><a href="#" (click)="switchPage('ask')">Ask HN</a></li>
+              <li><a href="#" (click)="switchPage('new')">Newest</a></li>
+              <li><a href="#" (click)="switchPage('best')">Best Stories</a></li>
+              <li><a href="#" (click)="switchPage('job')">Job Stories</a></li>
+              <!--<li><a href="#" (click)="settings()">Settings</a></li>-->-
             </ul>
           </li>
         </ul>
         <h1>Hacker News</h1>
         <ul class="r-menu list-inline menu">
-          <li><a href="#" class="reload"><span class="icon icon-refresh"></span></a></li>
+          <li><a href="#" (click)="reload($event)" class="reload"><span class="icon icon-refresh"></span></a></li>
         </ul>
       </header>
     </div>
@@ -26,7 +26,7 @@
       <div class="bd">
         <div class="show-loading" [hidden]="!showLoading"><div class="circle"></div><br>Loading...</div>
         <ul class="list">
-          <li *ngFor="let item of items" data-id="{{item.id}}">
+          <li *ngFor="let item of items">
             <a href="#/article/{{item.id}}" class="story">
               <h3>{{item.title}}</h3>
 
@@ -40,7 +40,7 @@
             </a>
           </li>
         </ul>
-        <div class="more" [hidden]="!showLoadMore"><a href="#" class="load-more" (click)="loadNext($event)">Load More</a></div>
+        <div class="more" [hidden]="!showLoadMore"><a class="load-more" (click)="loadNext($event)">Load More</a></div>
       </div>
     </section>
   </div>

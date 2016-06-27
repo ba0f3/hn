@@ -150,6 +150,7 @@
   text-align: center;
   font-weight: 400;
   background: rgba(0, 0, 0, .1);
+  cursor: pointer;
 }
 
 .page-home .bd .comments {

@@ -1,6 +1,6 @@
 <div class="header-container" *ngIf="item">
   <header class="header">
-    <div class="l-menu "><a href="#" class="back back-home"><span class="icon icon-arrow-left"></span></a></div>
+    <div class="l-menu "><a href="#" (click)="loc.back();" class="back back-home"><span class="icon icon-arrow-left"></span></a></div>
     <h1>Article</h1>
     <div class="r-menu"><a href="#/comments/{{item.id}}" class="show-comments"><span class="icon icon-bubble"></span></a></div>
   </header>
@@ -14,12 +14,15 @@
       <span class="author"> {{item.by}}</span>
       <span class="time-ago">{{item.time | amFromUnix | amTimeAgo}}</span>
       <span class="comments-count"><span class="icon icon-bubble"></span>{{item.descendants}}</span>
-      <a class="url article-url" href="{{item.url}}"><span class="icon icon-export"></span> {{item.url | prettyUrl}}</a>
-      <a class="url hn-url" href="https://news.ycombinator.com/item?id={{item.id}}"><span class="icon icon-export"></span> news.ycombinator.com/item?id={{item.id}}</a>
+      <a *ngIf="item.url" class="url article-url" href="{{item.url}}" target="_blank"><span class="icon icon-export"></span> {{item.url | prettyUrl}}</a>
+      <a class="url hn-url" href="https://news.ycombinator.com/item?id={{item.id}}" target="_blank"><span class="icon icon-export"></span> news.ycombinator.com/item?id={{item.id}}</a>
     </div>
-    <div class="article-content">
+    <div class="article-content" *ngIf="item.url">
       <div class="show-loading" [hidden]="content != null"><div class="circle"></div><br>Loading...</div>
       <div *ngIf="content" innerHTML="{{content.summary}}"></div>
+    </div>
+    <div class="article-content" *ngIf="!item.url">
+      <div *ngIf="content" innerHTML="{{item.text}}"></div>
     </div>
   </div>
 </section>

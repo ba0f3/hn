@@ -37,6 +37,7 @@ var barrels = [
     'app/item-view',
     'app/dummy',
     'app/comment-view',
+    'app/comment-item',
 ];
 var cliSystemConfigPackages = {};
 barrels.forEach(function (barrelName) {
