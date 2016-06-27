@@ -51,12 +51,14 @@ export class AppComponent {
       () =>  {
         if(this.itemIds.length > 0)
           this.showLoading = false;
-        this.loadMore();
+        this.loadNext(null);
       }
     );
   }
 
-  loadMore() {
+  loadNext(event) {
+    if(event)
+      event.preventDefault()
     var count = 0;
     while(count < 10) {
       count++;
