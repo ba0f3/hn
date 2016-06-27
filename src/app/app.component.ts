@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+import {Component} from '@angular/core';
+import {ROUTER_DIRECTIVES, Router} from '@angular/router';
 import { TimeAgoPipe, FromUnixPipe } from 'angular2-moment';
 import { Observable } from 'rxjs/Observable';
 
@@ -17,6 +17,7 @@ import { Page, Item } from './models';
 export class AppComponent {
   showLoading = true;
   showLoadMore = true;
+  showContentPage = true;
   showSubMenu = '';
 
   itemIds: number[] = [];
@@ -25,9 +26,25 @@ export class AppComponent {
 
   currentPage = Page.FRONT_PAGE;
   lastIndex: number = 0;
+  private sub: any;
 
-  constructor(private hn: HnService) {
+  constructor(private router: Router, private hn: HnService) {
     this.loadData();
+
+    // dirty hack for responsive view
+    if(window.matchMedia("(max-width: 768px)").matches) {
+      this.showContentPage = false;
+      this.sub = this.router.events.subscribe(event => {
+        if(event.url.startsWith("/article") || event.url.startsWith("/comments")) {
+          this.showContentPage = true;
+        } else {
+          this.showContentPage = false;
+        }
+      });
+    } else {
+      if(this.sub)
+        this.sub.unsubscribe();
+    }
   }
 
   switchPage(page: string) {

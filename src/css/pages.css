@@ -119,12 +119,18 @@
   .android-chrome .pages-container .page-home {
     display: block;
   }
-  .pages-container .page-about,
-  .pages-container .page-settings,
-  .pages-container .page-performance,
-  .pages-container .page-article-comments,
-  .pages-container .page-article-content {
+
+  .pages-container .page-content {
     left: 360px;
+  }
+}
+
+@media only screen and (max-width : 768px) {
+  .pages-container .page {
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    transform: translate(0, 0);
   }
 }
 
@@ -282,13 +288,13 @@
   display: none;
 }
 
-.page-article-content .article-content {
+.page-content .article-content {
   padding: 10px 15px;
   background: #fff;
   min-height: 60%;
 }
 
-.page-article-content .article-content img {
+.page-content .article-content img {
   max-width: 100%;
 }
 
