@@ -42,6 +42,7 @@ const barrels: string[] = [
   'app/item-view',
   'app/dummy',
   'app/comment-view',
+  'app/comment-item',
   /** @cli-barrel */
 ];
 

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
+import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
+
 
 import './rxjs-operators';
 import { Item } from './models';
@@ -25,6 +27,23 @@ export class HnService {
       .map(res => res.json())
       .catch(this.handleError);
   }
+
+  fetchKids(kids: number[]): Observable<Item> {
+    return new Observable<Item>((ob: Observer<Item>) => {
+        for(let i in kids) {
+          console.log("Fetch comment: " + kids[i]);
+          this.fetchItem(kids[i]).subscribe((item: Item) => {
+            if(item.kids) {
+              this.fetchKids(item.kids).subscribe(item => ob.next(item));
+            }
+            ob.next(item);
+          });
+        }
+      }
+    )
+
+  }
+
 
   fetchContent(url: string, id: number): Observable<any> {
     return this.http.get(ws_prefix + "/?url=" + encodeURIComponent(url) + "&id=" + id)

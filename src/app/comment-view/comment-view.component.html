@@ -22,6 +22,10 @@
       <a class="url hn-url" href="https://news.ycombinator.com/item?id={{item.id}}"><span class="icon icon-export"></span> news.ycombinator.com/item?id={{item.id}}</a>
       <div class="text op-comment">{{item.text}}</div>
     </div>
-    <div class="article-comments"><br><div class="show-loading"><div class="circle"></div><br>Loading...</div></div>
+    <div class="article-comments">
+      <ul>
+        <li comment-item *ngFor="let kid of item.kids" [id]="kid"></li>
+      </ul>
+    </div>
   </div>
 </section>

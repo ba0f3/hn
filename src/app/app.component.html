@@ -26,7 +26,7 @@
       <div class="bd">
         <div class="show-loading" [hidden]="!showLoading"><div class="circle"></div><br>Loading...</div>
         <ul class="list">
-          <li *ngFor="let item of items" data-id="{{item.id}}">
+          <li *ngFor="let item of items">
             <a href="#/article/{{item.id}}" class="story">
               <h3>{{item.title}}</h3>
 
