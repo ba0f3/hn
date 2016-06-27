@@ -16,8 +16,8 @@ describe('App: Hn', () => {
     expect(app).toBeTruthy();
   }));
 
-  it('should have as title \'app works!\'',
+  it('should have as showLoading \'true\'',
       inject([AppComponent], (app: AppComponent) => {
-    expect(app.title).toEqual('app works!');
+    expect(app.showLoading).toEqual(true);
   }));
 });

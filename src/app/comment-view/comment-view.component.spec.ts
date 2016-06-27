@@ -13,8 +13,7 @@ import {
 import { CommentViewComponent } from './comment-view.component';
 
 describe('Component: CommentView', () => {
-  it('should create an instance', () => {
-    let component = new CommentViewComponent();
-    expect(component).toBeTruthy();
-  });
+  it('should create an instance', inject([CommentViewComponent], (comp: CommentViewComponent) => {
+    expect(comp).toBeTruthy();
+  }))
 });

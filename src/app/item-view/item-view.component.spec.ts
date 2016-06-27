@@ -13,8 +13,7 @@ import {
 import { ItemViewComponent } from './item-view.component';
 
 describe('Component: ItemView', () => {
-  it('should create an instance', () => {
-    let component = new ItemViewComponent();
-    expect(component).toBeTruthy();
-  });
+  it('should create an instance', inject([ItemViewComponent], (comp: ItemViewComponent) => {
+    expect(comp).toBeTruthy();
+  }));
 });
