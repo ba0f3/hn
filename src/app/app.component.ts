@@ -72,4 +72,12 @@ export class AppComponent {
       this.showLoadMore = false;
     }
   }
+
+  reload(event) {
+    event.preventDefault();
+    this.itemIds = [];
+    this.items = [];
+    this.lastIndex = 0;
+    this.loadData();
+  }
 }
