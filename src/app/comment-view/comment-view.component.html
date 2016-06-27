@@ -1,6 +1,6 @@
 <div class="header-container" *ngIf="item">
   <header class="header">
-    <div class="l-menu "><a href="#" class="back back-home"><span class="icon icon-arrow-left"></span></a></div>
+    <div class="l-menu "><a href="#" (click)="loc.back()" class="back back-home"><span class="icon icon-arrow-left"></span></a></div>
     <h1>Comments ({{item.descendants}})</h1>
     <ul class="r-menu list-inline menu">
       <li>

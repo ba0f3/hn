@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { TimeAgoPipe, FromUnixPipe } from 'angular2-moment';
 
 import { HnService } from '../hn.service';
@@ -18,10 +19,13 @@ export class CommentViewComponent implements OnInit, OnDestroy {
   item: Item;
   errorMessage: any;
   private sub: any;
+  loc: Location;
 
   constructor(
+    loc: Location,
     private route: ActivatedRoute,
     private  hn: HnService) {
+    this.loc = loc;
   }
 
   ngOnInit() {
