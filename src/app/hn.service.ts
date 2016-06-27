@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import './rxjs-operators';
 import { Item } from './models';
 
-const ws_prefix = "http://ws.huy.im"
+const ws_prefix = "//ws.huy.im"
 const prefix =  "https://hacker-news.firebaseio.com/v0/";
 
 @Injectable()
