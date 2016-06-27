@@ -3,7 +3,9 @@ export enum Page {
   FRONT_PAGE = 1,
   ASK_HN,
   SHOW_HN,
-  NEWEST
+  NEWEST,
+  BEST,
+  JOB
 }
 
 

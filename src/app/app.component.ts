@@ -17,6 +17,7 @@ import { Page, Item } from './models';
 export class AppComponent {
   showLoading = true;
   showLoadMore = true;
+  showSubMenu = '';
 
   itemIds: number[] = [];
   items: Item[] = [];
@@ -29,8 +30,21 @@ export class AppComponent {
     this.loadData();
   }
 
-  togglePage(page: Page) {
-    console.log(page);
+  switchPage(page: string) {
+    if(page == 'fp')
+      this.currentPage = Page.FRONT_PAGE;
+    else if (page == 'ask')
+      this.currentPage = Page.ASK_HN;
+    else if (page == 'show')
+      this.currentPage = Page.SHOW_HN;
+    else if (page == 'job')
+      this.currentPage = Page.JOB;
+    else if (page == 'new')
+      this.currentPage = Page.NEWEST;
+    else if (page == 'best')
+      this.currentPage = Page.BEST;
+    this.showSubMenu = '';
+    this.reload(null);
   }
 
   loadData() {
@@ -38,11 +52,24 @@ export class AppComponent {
     var ob: Observable<number[]>;
     switch (this.currentPage) {
       case Page.ASK_HN:
-            break;
+        ob = this.hn.getAskStories();
+        break;
+      case Page.SHOW_HN:
+        ob = this.hn.getShowStories();
+        break;
+      case Page.JOB:
+        ob = this.hn.getJobStories();
+        break;
+      case Page.NEWEST:
+        ob = this.hn.getNewStories();
+        break;
+      case Page.BEST:
+        ob = this.hn.getBestStories();
+        break;
       case Page.FRONT_PAGE:
       default:
-            ob = this.hn.getTopStories();
-            break;
+        ob = this.hn.getTopStories();
+        break;
     }
 
     ob.subscribe(
@@ -74,10 +101,20 @@ export class AppComponent {
   }
 
   reload(event) {
-    event.preventDefault();
+    if(event)
+      event.preventDefault()
     this.itemIds = [];
     this.items = [];
     this.lastIndex = 0;
     this.loadData();
+  }
+
+  toggleSubMenu(event) {
+    event.preventDefault();
+    if(this.showSubMenu == '') {
+      this.showSubMenu = 'show-submenu';
+    } else {
+      this.showSubMenu = '';
+    }
   }
 }

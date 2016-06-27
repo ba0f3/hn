@@ -13,8 +13,7 @@ import {
 import { CommentItemComponent } from './comment-item.component';
 
 describe('Component: CommentItem', () => {
-  it('should create an instance', () => {
-    let component = new CommentItemComponent();
-    expect(component).toBeTruthy();
-  });
+  it('should create an instance', inject([CommentItemComponent], (comp: CommentItemComponent) => {
+    expect(comp).toBeTruthy();
+  }))
 });

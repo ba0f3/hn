@@ -14,10 +14,48 @@ const prefix =  "https://hacker-news.firebaseio.com/v0/";
 export class HnService {
   constructor (private http: Http) {}
 
-  private topStories = prefix + 'topstories.json';
+  private TOP_STORIES = prefix + 'topstories.json';
+  private BEST_STORIES = prefix + 'beststories.json';
+  private NEW_STORIES = prefix + 'newstories.json';
 
-  getTopStories (): Observable<number[]> {
-    return this.http.get(this.topStories)
+  private ASK_STORIES = prefix + 'askstories.json';
+  private SHOW_STORIES = prefix + 'showstories.json';
+  private JOB_STORIES = prefix + 'jobstories.json';
+
+
+
+  getTopStories(): Observable<number[]> {
+    return this.http.get(this.TOP_STORIES)
+      .map(this.parseJson)
+      .catch(this.handleError);
+  }
+
+  getBestStories(): Observable<number[]> {
+    return this.http.get(this.BEST_STORIES)
+      .map(this.parseJson)
+      .catch(this.handleError);
+  }
+
+  getNewStories(): Observable<number[]> {
+    return this.http.get(this.NEW_STORIES)
+      .map(this.parseJson)
+      .catch(this.handleError);
+  }
+
+  getAskStories(): Observable<number[]> {
+    return this.http.get(this.ASK_STORIES)
+      .map(this.parseJson)
+      .catch(this.handleError);
+  }
+
+  getShowStories(): Observable<number[]> {
+    return this.http.get(this.SHOW_STORIES)
+      .map(this.parseJson)
+      .catch(this.handleError);
+  }
+
+  getJobStories(): Observable<number[]> {
+    return this.http.get(this.JOB_STORIES)
       .map(this.parseJson)
       .catch(this.handleError);
   }

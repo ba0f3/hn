@@ -18,7 +18,7 @@
       <span class="author"> {{item.by}}</span>
       <span class="time-ago">{{item.time | amFromUnix | amTimeAgo }}</span>
       <span class="comments-count"><span class="icon icon-bubble"></span>{{item.descendants}}</span>
-      <a class="url article-url" href="{{item.url}}" target="_blank"><span class="icon icon-export"></span> {{item.url | prettyUrl}}</a>
+      <a *ngIf="item.url" class="url article-url" href="{{item.url}}" target="_blank"><span class="icon icon-export"></span> {{item.url | prettyUrl}}</a>
       <a class="url hn-url" href="https://news.ycombinator.com/item?id={{item.id}}" target="_blank"><span class="icon icon-export"></span> news.ycombinator.com/item?id={{item.id}}</a>
       <div class="text op-comment">{{item.text}}</div>
     </div>
