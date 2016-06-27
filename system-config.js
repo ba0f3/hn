@@ -33,7 +33,6 @@ var barrels = [
     'rxjs',
     // App specific barrels.
     'app',
-    'app/shared',
     'app/item-view',
     'app/dummy',
     'app/comment-view',
