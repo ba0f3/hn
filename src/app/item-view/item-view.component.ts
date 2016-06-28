@@ -6,6 +6,7 @@ import { TimeAgoPipe, FromUnixPipe } from 'angular2-moment';
 import { HnService } from '../hn.service';
 import { PrettyUrlPipe } from '../pretty-url.pipe'
 import { Item } from '../models';
+import {LocalStorageService} from "../local-storage.service";
 
 @Component({
   moduleId: module.id,
@@ -24,7 +25,8 @@ export class ItemViewComponent implements OnInit, OnDestroy {
   constructor(
     loc: Location,
     private route: ActivatedRoute,
-    private  hn: HnService) {
+    private hn: HnService,
+    private ls: LocalStorageService) {
     this.loc = loc;
   }
 
@@ -38,7 +40,12 @@ export class ItemViewComponent implements OnInit, OnDestroy {
           this.item = item;
           this.hn.fetchContent(item.url, id).subscribe(content => this.content = content);
         },
-        error => this.errorMessage = <any>error
+        error => this.errorMessage = <any>error,
+        () => {
+          let visited: number[] = this.ls.get("visited", []);
+          visited.push(id);
+          this.ls.set("visited", visited);
+        }
       )
     });
   }

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { HnService } from './hn.service';
 import { PrettyUrlPipe } from './pretty-url.pipe'
 import { Page, Item } from './models';
+import {LocalStorageService} from "./local-storage.service";
 
 @Component({
   moduleId: module.id,
@@ -30,7 +31,9 @@ export class AppComponent {
 
   router: Router;
 
-  constructor(router: Router, private hn: HnService) {
+  constructor(router: Router,
+              private ls: LocalStorageService,
+              private hn: HnService) {
     this.router = router;
     this.loadData();
 
@@ -138,7 +141,12 @@ export class AppComponent {
     }
   }
 
-  isActive(route: string) {
+  isActive(route: string): boolean {
     return this.router.url == this.router.serializeUrl(this.router.createUrlTree([route]));
+  }
+
+  isVisited(id: number): boolean {
+    let visited: number[] = this.ls.get("visited", []);
+    return visited.find(_id => _id == id) >= 0;
   }
 }

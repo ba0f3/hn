@@ -27,7 +27,7 @@
         <div class="bd">
           <div class="show-loading" [hidden]="!showLoading"><div class="circle"></div><br>Loading...</div>
           <ul class="list">
-            <li *ngFor="let item of items" [class.active]="isActive('/article/' + item.id)">
+            <li *ngFor="let item of items" [class.active]="isActive('/article/' + item.id)" [class.visited]="isVisited(item.id)">
               <a href="#/article/{{item.id}}" class="story">
                 <h3>{{item.title}}</h3>
 

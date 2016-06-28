@@ -236,7 +236,7 @@
   padding: 10px 15px 10px 10px;
 }
 
-.page-home .story:visited {
+.page-home li.visited .story {
   opacity: 1;
 }
 
