@@ -30,6 +30,8 @@ export class ItemViewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
+      // clear content
+      this.content = null;
       let id = parseInt(params['id']);
       this.hn.fetchItem(id).subscribe(
         item => {
@@ -44,5 +46,4 @@ export class ItemViewComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-
 }

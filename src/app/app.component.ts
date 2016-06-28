@@ -28,7 +28,10 @@ export class AppComponent {
   lastIndex: number = 0;
   private sub: any;
 
-  constructor(private router: Router, private hn: HnService) {
+  router: Router;
+
+  constructor(router: Router, private hn: HnService) {
+    this.router = router;
     this.loadData();
 
     // dirty hack for responsive view
@@ -133,5 +136,9 @@ export class AppComponent {
     } else {
       this.showSubMenu = '';
     }
+  }
+
+  isActive(route: string) {
+    return this.router.url == this.router.serializeUrl(this.router.createUrlTree([route]));
   }
 }
