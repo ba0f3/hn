@@ -3,7 +3,7 @@
 # compiled output
 /dist
 /tmp
-
+/click/www
 # dependencies
 /node_modules
 /bower_components
