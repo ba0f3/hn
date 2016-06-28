@@ -1,0 +1,15 @@
+{
+    "name": "hntouch",
+    "description": "Read Hacker News (https://news.ycombinator.com/) articles and comments with this clean, simple, modern looking and fast performing universal app.",
+    "architecture": "all",
+    "title": "Hacker News",
+    "hooks": {
+        "hntouch": {
+            "apparmor": "hntouch.apparmor",
+            "desktop": "hntouch.desktop"
+        }
+    },
+    "version": "0.1.2.5",
+    "maintainer": "Huy Doan <me@huy.im>",
+    "framework": "ubuntu-sdk-15.04.5"
+}

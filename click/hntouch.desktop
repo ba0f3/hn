@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Hacker News
+Exec=webapp-container --inspector ./www/index.html
+Icon=hntouch.png
+Terminal=false
+Type=Application
+X-Ubuntu-Touch=true
+

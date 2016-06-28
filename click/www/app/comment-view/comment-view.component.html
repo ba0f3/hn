@@ -1,0 +1,31 @@
+<div class="header-container" *ngIf="item">
+  <header class="header">
+    <div class="l-menu "><a href="#" (click)="loc.back()" class="back back-home"><span class="icon icon-arrow-left"></span></a></div>
+    <h1>Comments ({{item.descendants}})</h1>
+    <ul class="r-menu list-inline menu">
+      <li>
+        <a href="#/article/{{item.id}}" class="show-article"><span class="icon icon-newspaper"></span></a>
+      </li>
+    </ul>
+  </header>
+</div>
+
+<section class="pagebd-container" *ngIf="item">
+  <div class="bd">
+    <div class="article-meta">
+      <h3 class="title">{{item.title}}</h3>
+      <span class="points">{{item.score}}</span>
+      <span class="author"> {{item.by}}</span>
+      <span class="time-ago">{{item.time | amFromUnix | amTimeAgo }}</span>
+      <span class="comments-count"><span class="icon icon-bubble"></span>{{item.descendants}}</span>
+      <a *ngIf="item.url" class="url article-url" href="{{item.url}}" target="_blank"><span class="icon icon-export"></span> {{item.url | prettyUrl}}</a>
+      <a class="url hn-url" href="https://news.ycombinator.com/item?id={{item.id}}" target="_blank"><span class="icon icon-export"></span> news.ycombinator.com/item?id={{item.id}}</a>
+      <div class="text op-comment">{{item.text}}</div>
+    </div>
+    <div class="article-comments">
+      <ul>
+        <li comment-item *ngFor="let kid of item.kids" [id]="kid"></li>
+      </ul>
+    </div>
+  </div>
+</section>
