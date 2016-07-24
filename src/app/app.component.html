@@ -19,13 +19,13 @@
           </ul>
           <h1>Hacker News</h1>
           <ul class="r-menu list-inline menu">
-            <li><a href="#" (click)="reload($event)" class="reload"><span class="icon icon-refresh"></span></a></li>
+            <li><a href="#" (click)="reload($event)" class="reload"><span class="icon icon-refresh" [class.spin]="isReloading"></span></a></li>
           </ul>
         </header>
       </div>
       <section class="pagebd-container">
         <div class="bd">
-          <div class="show-loading" [hidden]="!showLoading"><div class="circle"></div><br>Loading...</div>
+          <div class="show-loading" [hidden]="items.length"><div class="circle"></div><br>Loading...</div>
           <ul class="list">
             <li *ngFor="let item of items" [class.active]="isActive('/article/' + item.id)" [class.visited]="isVisited(item.id)">
               <a href="#/article/{{item.id}}" class="story">

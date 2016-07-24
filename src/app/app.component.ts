@@ -16,7 +16,7 @@ import {LocalStorageService} from "./local-storage.service";
   directives: [ROUTER_DIRECTIVES]
 })
 export class AppComponent {
-  showLoading = true;
+  isReloading = true;
   showLoadMore = true;
   showContentPage = true;
   showSubMenu = '';
@@ -99,8 +99,7 @@ export class AppComponent {
       items => this.itemIds = items,
       error =>  this.errorMessage = <any>error,
       () =>  {
-        if(this.itemIds.length > 0)
-          this.showLoading = false;
+        this.isReloading = false
         this.loadNext(null);
       }
     );
@@ -110,7 +109,7 @@ export class AppComponent {
     if(event)
       event.preventDefault()
     var count = 0;
-    while(count < 10) {
+    while(count < 20) {
       count++;
 
       this.hn.fetchItem(this.itemIds[this.lastIndex++]).subscribe(
@@ -129,6 +128,7 @@ export class AppComponent {
     this.itemIds = [];
     this.items = [];
     this.lastIndex = 0;
+    this.isReloading = true;
     this.loadData();
   }
 

@@ -16,8 +16,8 @@ describe('App: Hn', () => {
     expect(app).toBeTruthy();
   }));
 
-  it('should have as showLoading \'true\'',
+  it('should have as isReloading \'true\'',
       inject([AppComponent], (app: AppComponent) => {
-    expect(app.showLoading).toEqual(true);
+    expect(app.isReloading).toEqual(true);
   }));
 });
