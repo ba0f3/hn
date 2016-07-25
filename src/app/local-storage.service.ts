@@ -17,7 +17,7 @@ export class LocalStorageService {
   }
 
   getTemp(key: string, _default: any) {
-    let ret = window.localStorage.getItem(key);
+    let ret = window.sessionStorage.getItem(key);
     if(!ret)
       return _default;
     return JSON.parse(ret);

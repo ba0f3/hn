@@ -63,7 +63,13 @@ export class HnService {
   fetchItem(id: number): Observable<Item> {
     var cached = this.ls.getTemp("cache_" + id, false);
     if (cached) {
-      return Observable.create(cached)
+      return Observable.create(function (observer) {
+        observer.next(cached);
+        observer.complete();
+        return function () {
+          console.log('disposed');
+        }
+      });
     } else {
       return this.http.get(prefix + "item/" + id + ".json")
         .map(res => {
@@ -90,7 +96,13 @@ export class HnService {
   fetchContent(url: string, id: number): Observable<any> {
     var cached = this.ls.getTemp("content_" + id, false);
     if (cached) {
-      return Observable.create(cached)
+      return Observable.create(function (observer) {
+        observer.next(cached);
+        observer.complete();
+        return function () {
+          console.log('disposed');
+        }
+      });
     } else {
       return this.http.get(ws_prefix + "/?url=" + encodeURIComponent(url) + "&id=" + id)
         .map(res => {
