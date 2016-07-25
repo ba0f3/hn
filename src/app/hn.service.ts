@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
-
+import {LocalStorageService} from "./local-storage.service";
 
 import './rxjs-operators';
 import { Item } from './models';
 
-const ws_prefix = "https://ws.huy.im"
+const ws_prefix = "https://ws.huy.im/v2"
 const prefix =  "https://hacker-news.firebaseio.com/v0/";
 
 @Injectable()
 export class HnService {
-  constructor (private http: Http) {}
+  constructor (private http: Http, private ls: LocalStorageService) {}
 
   private TOP_STORIES = prefix + 'topstories.json';
   private BEST_STORIES = prefix + 'beststories.json';
@@ -61,9 +61,17 @@ export class HnService {
   }
 
   fetchItem(id: number): Observable<Item> {
-    return this.http.get(prefix + "item/" + id + ".json")
-      .map(res => res.json())
-      .catch(this.handleError);
+    var cached = this.ls.getTemp("cache_" + id, false);
+    if (cached) {
+      return Observable.create(cached)
+    } else {
+      return this.http.get(prefix + "item/" + id + ".json")
+        .map(res => {
+          this.ls.setTemp("cache_" + id, res.json())
+          return res.json()
+
+        }).catch(this.handleError);
+    }
   }
 
   fetchKids(kids: number[]): Observable<Item> {
@@ -80,9 +88,17 @@ export class HnService {
   }
 
   fetchContent(url: string, id: number): Observable<any> {
-    return this.http.get(ws_prefix + "/?url=" + encodeURIComponent(url) + "&id=" + id)
-      .map(res => res.json())
-      .catch(this.handleError);
+    var cached = this.ls.getTemp("content_" + id, false);
+    if (cached) {
+      return Observable.create(cached)
+    } else {
+      return this.http.get(ws_prefix + "/?url=" + encodeURIComponent(url) + "&id=" + id)
+        .map(res => {
+          this.ls.setTemp("content_" + id, res.json())
+          return res.json();
+        })
+        .catch(this.handleError);
+    }
   }
 
   private handleError (error: any) {

@@ -18,8 +18,12 @@
       <a class="url hn-url" href="https://news.ycombinator.com/item?id={{item.id}}" target="_blank"><span class="icon icon-export"></span> news.ycombinator.com/item?id={{item.id}}</a>
     </div>
     <div class="article-content" *ngIf="item.url">
-      <div class="show-loading" [hidden]="content != null"><div class="circle"></div><br>Loading...</div>
-      <div *ngIf="content" innerHTML="{{content.summary}}"></div>
+      <div class="show-loading" [hidden]="content != null || error == true"><div class="circle"></div><br>Loading...</div>
+      <div *ngIf="content" innerHTML="{{content.content}}"></div>
+      <div *ngIf="error">Unable to fetch content for this article, open in browser:
+      <br />
+        <a href="{{item.url}}">{{item.url}}</a>
+      </div>
     </div>
     <div class="article-content" *ngIf="!item.url">
       <div *ngIf="content" innerHTML="{{item.text}}"></div>

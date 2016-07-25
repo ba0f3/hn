@@ -19,6 +19,7 @@ export class ItemViewComponent implements OnInit, OnDestroy {
   content: any;
   errorMessage: any;
   private sub: any;
+  error: boolean;
 
   loc: Location;
 
@@ -34,13 +35,21 @@ export class ItemViewComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       // clear content
       this.content = null;
+      this.error = false
       let id = parseInt(params['id']);
       this.hn.fetchItem(id).subscribe(
         item => {
           this.item = item;
-          this.hn.fetchContent(item.url, id).subscribe(content => this.content = content);
+          this.hn.fetchContent(item.url, id).timeout(2000, new Error("Unable to fetch content for the article")).subscribe(
+            content => this.content = content,
+            error => this.error = true);
         },
-        error => this.errorMessage = <any>error,
+        error => {
+          this.errorMessage = <any>error;
+          console.log(this.errorMessage);
+          this.content = false
+          this.error = true;
+        },
         () => {
           let visited: number[] = this.ls.get("visited", []);
           visited.push(id);
