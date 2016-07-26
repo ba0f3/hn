@@ -40,7 +40,7 @@ export class ItemViewComponent implements OnInit, OnDestroy {
       this.hn.fetchItem(id).subscribe(
         item => {
           this.item = item;
-          this.hn.fetchContent(item.url, id).timeout(3000, new Error("Unable to fetch content for the article")).subscribe(
+          this.hn.fetchContent(item.url, id).timeout(10000, new Error("Unable to fetch content for the article")).subscribe(
             content => this.content = content,
             error => this.error = true);
         },
